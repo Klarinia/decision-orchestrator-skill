@@ -1,0 +1,7 @@
+interface:
+  display_name: "Claude Multi Advisor Runner"
+  short_description: "Run Router→Agents→CEO in one command"
+  icon_small: "./assets/claude-small.svg"
+  icon_large: "./assets/claude-large.svg"
+  brand_color: "#D97706"
+  default_prompt: "Use $multi-advisor-runner to run one decision end-to-end and generate Router→Agents→CEO artifacts."

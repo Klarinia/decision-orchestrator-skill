@@ -1,0 +1,7 @@
+interface:
+  display_name: "ChatGPT Multi Advisor Runner"
+  short_description: "Run Router→Agents→CEO in one command"
+  icon_small: "./assets/chatgpt-small.svg"
+  icon_large: "./assets/chatgpt-large.svg"
+  brand_color: "#10A37F"
+  default_prompt: "Use $multi-advisor-runner to run one decision end-to-end and generate Router→Agents→CEO artifacts."
