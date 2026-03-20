@@ -1,0 +1,25 @@
+{
+  "problem_type": "High-Impact Decision",
+  "objective": "Decide whether to adjust MVP pricing strategy",
+  "context": "Current conversion is constrained by price objections while maintaining high-end positioning",
+  "constraints": {
+    "Time": "Launch within 7 days",
+    "Budget": "No additional budget",
+    "People": "2 advisors + 1 assistant"
+  },
+  "success_metrics": [
+    "Qualified paid intents >= 3 in 7 days",
+    "Signed clients >= 2",
+    "Target segment interview pass rate >= 60%"
+  ],
+  "options": [
+    "Keep current price",
+    "Direct price cut",
+    "Keep anchor price with milestone-based payments"
+  ],
+  "known_risks": [
+    "Brand dilution",
+    "Delivery overload",
+    "Inconsistent sales messaging"
+  ]
+}
