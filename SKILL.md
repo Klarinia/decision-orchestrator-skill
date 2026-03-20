@@ -1,15 +1,15 @@
 ---
-name: multi-advisor-runner
-description: Use when the user wants to run the multi-advisor decision workflow with minimal manual prompt orchestration, generate Router→Agents→CEO run artifacts in one pass, or prepare OpenClaw-compatible decision payloads.
+name: decision-orchestrator-skill
+description: Use when the user wants to run a Router→Advisors→CEO decision workflow with minimal manual orchestration, generate structured run artifacts, or prepare OpenClaw-compatible payloads.
 ---
 
-# Multi Advisor Runner
+# Decision Orchestrator Skill
 
 ## Overview
 This skill reduces multi-file manual orchestration into a single run command. It creates one run package with Router/Agents/CEO artifacts and an OpenClaw handoff payload.
 
 ## When To Use
-- User asks to run one decision end-to-end with the multi-advisor architecture.
+- User asks to run one decision end-to-end with a decision-orchestrator architecture.
 - User wants fewer manual prompt-file calls.
 - User wants OpenClaw-compatible input/output for workflow automation.
 
@@ -21,10 +21,10 @@ This skill reduces multi-file manual orchestration into a single run command. It
 
 ## Command
 ```bash
-python3 ~/.codex/skills/multi-advisor-runner/scripts/run_multi_advisor.py \
-  --input /path/to/decision-input.json \
-  --runs-root "/Users/chuen/多顾问决策系统/runs" \
-  --owner "Elias"
+python3 scripts/run_multi_advisor.py \
+  --input references/openclaw-input.example.json \
+  --runs-root ./runs \
+  --owner "Decision Owner"
 ```
 
 ## Artifacts
@@ -38,11 +38,8 @@ Per run, this skill creates:
 - `07-one-shot-prompt.md`
 - `openclaw-payload.json`
 
-## Notes
-- This script scaffolds deterministic structure.
-- You can fill/refine advisor reasoning after generation, or run the one-shot prompt for a single-pass completion.
+## UI Display Profiles
+- Default profile in `agents/openai.yaml`
+- Alternate profile in `agents/openai.chatgpt.yaml`
 
-## Branding Switch (Claude/ChatGPT)
-- Default profile is `agents/openai.yaml` (Claude style).
-- For ChatGPT style, replace it with `agents/openai.chatgpt.yaml` content.
-- Avatar assets are in `assets/` and can be replaced with official provider branding if needed.
+These profile files control UI metadata only, not Git commit identity.

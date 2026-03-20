@@ -48,11 +48,11 @@ def format_constraints_md(constraints: dict) -> str:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Generate one multi-advisor run package")
+    parser = argparse.ArgumentParser(description="Generate one decision-orchestrator run package")
     parser.add_argument("--input", required=True, help="Path to decision input JSON")
-    parser.add_argument("--runs-root", default="/Users/chuen/多顾问决策系统/runs", help="Runs output root")
+    parser.add_argument("--runs-root", default="./runs", help="Runs output root")
     parser.add_argument("--run-id", default="", help="Optional explicit run id")
-    parser.add_argument("--owner", default="Elias", help="Decision owner")
+    parser.add_argument("--owner", default="Decision Owner", help="Decision owner")
     args = parser.parse_args()
 
     input_path = Path(args.input).expanduser().resolve()
@@ -215,7 +215,7 @@ hard_stop_reason: 无
 """
 
     one_shot_prompt = (
-        "你是多顾问决策系统执行器。请基于以下输入，按 Router -> Agents -> CEO Final 一次性完成输出。\n\n"
+        "你是 Decision Orchestrator 执行器。请基于以下输入，按 Router -> Agents -> CEO Final 一次性完成输出。\n\n"
         f"# 输入\n{json.dumps(data, ensure_ascii=False, indent=2)}\n\n"
         "# 要求\n"
         "1. 先输出 Router YAML（category/confidence/route/data_gaps）。\n"

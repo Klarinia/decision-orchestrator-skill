@@ -33,12 +33,12 @@
 
 ## 3. 每位 Agent / Prompt 的细化职责
 
-- **Drucker**：客户是谁、价值是什么、是否可验证。
-- **Jobs**：体验是否足够清晰流畅，是否存在多余内容。
-- **Kenya Hara**：结构是否必要，能否删除/合并以降低认知成本。
-- **Munger**：用多模型评估风险（经济学/心理学/概率）。
-- **Buffett**：是否强化护城河，是否偏离核心战略。
-- **Musk**：为何还没开始，如何在48小时内落地最小动作。
+- **Drucker / 德鲁克**：客户是谁、价值是什么、是否可验证。
+- **Jobs / 乔布斯**：体验是否足够清晰流畅，是否存在多余内容。
+- **Kenya Hara / 原研哉**：结构是否必要，能否删除/合并以降低认知成本。
+- **Munger / 芒格**：用多模型评估风险（经济学/心理学/概率）。
+- **Buffett / 巴菲特**：是否强化护城河，是否偏离核心战略。
+- **Musk / 马斯克**：为何还没开始，如何在48小时内落地最小动作。
 
 ## 4. 运行产物
 
@@ -60,8 +60,8 @@
 ```bash
 python3 scripts/run_multi_advisor.py \
   --input references/openclaw-input.example.json \
-  --runs-root "/Users/chuen/多顾问决策系统/runs" \
-  --owner "Elias"
+  --runs-root ./runs \
+  --owner "Decision Owner"
 ```
 
 ## 6. OpenClaw 使用方式
@@ -69,13 +69,15 @@ python3 scripts/run_multi_advisor.py \
 - 输入：兼容 `references/openclaw-input.example.json`。
 - 输出：`openclaw-payload.json` 可直接用于下游节点。
 
-## 7. 服务商头像与名称切换
+## 7. 界面展示配置（不是 GitHub 上传账号）
 
-当前仓库提供两套展示配置：
-- Claude：`agents/openai.yaml`（默认）
-- ChatGPT：`agents/openai.chatgpt.yaml`
+这一节只影响 skill 在界面中的展示名称/图标（`agents/openai*.yaml`），
+不影响你在 GitHub 的提交账号名称和头像。
 
-若要切换为 ChatGPT：将 `openai.chatgpt.yaml` 内容覆盖到 `openai.yaml` 后提交即可。
+- 默认展示配置：`agents/openai.yaml`
+- 备用展示配置：`agents/openai.chatgpt.yaml`
+
+若要切换展示样式：将备用配置内容覆盖到 `openai.yaml` 后提交即可。
 
 ## 8. 项目结构
 
@@ -87,6 +89,8 @@ decision-orchestrator-skill/
 ├── agents/
 ├── assets/
 ├── references/
+├── docs/
+│   └── agents.md
 └── scripts/
 ```
 

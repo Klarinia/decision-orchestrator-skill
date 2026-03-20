@@ -1,8 +1,8 @@
 # Agent & Prompt Specification
 
-This document details the expected behavior for Router, Advisors, and CEO Final prompts.
+This document defines output contracts for Router, Advisors, and CEO Final.
 
-## Router
+## Router / 路由器
 
 ### Inputs
 - objective
@@ -21,7 +21,7 @@ This document details the expected behavior for Router, Advisors, and CEO Final 
 - Must route to one of the allowed chains.
 - Must report missing data when confidence is not high.
 
-## Advisors (Common Contract)
+## Advisors / 顾问层 (Common Contract)
 
 ### Mandatory Output Blocks
 - decision
@@ -37,7 +37,15 @@ This document details the expected behavior for Router, Advisors, and CEO Final 
 ### Hard Stops
 Each advisor must explicitly mark blocking conditions.
 
-## CEO Final
+## Advisor Names (EN / 中文)
+- Drucker / 德鲁克
+- Jobs / 乔布斯
+- Kenya Hara / 原研哉
+- Munger / 芒格
+- Buffett / 巴菲特
+- Musk / 马斯克
+
+## CEO Final / 最终拍板层
 
 ### Mandatory Output Blocks
 - final_decision
