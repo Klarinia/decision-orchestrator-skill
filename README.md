@@ -1,15 +1,93 @@
-# Multi Advisor Runner Skill
+# Decision Orchestrator Skill
 
 English | [简体中文](./README.zh-CN.md)
 
-Run a full multi-advisor decision workflow in one command:
-Router -> Advisors -> CEO Final.
+A production-oriented skill that runs a full **Router -> Advisors -> CEO Final** decision workflow in one command.
 
-This skill is designed for Codex/Claude Code workflows and can be integrated into OpenClaw pipelines.
+Designed for:
+- Codex workflows
+- Claude Code workflows
+- OpenClaw pipeline handoff
 
-## What It Generates
+## 1. Why This Skill
 
-For each run, it creates:
+Manual multi-prompt orchestration is slow and inconsistent. This skill turns it into a deterministic run package:
+
+- Standardized structure
+- Traceable decision artifacts
+- Faster execution from idea to action
+- OpenClaw-compatible payload output
+
+## 2. Workflow Architecture
+
+```text
+Input JSON
+   |
+   v
+Router (classify + route)
+   |
+   v
+Advisor Chain (domain-specific analysis)
+   |
+   v
+CEO Final (conflict merge + final decision + action plan)
+   |
+   v
+Run Artifacts + OpenClaw Payload
+```
+
+### Routing Logic (default)
+
+- Growth Strategy: `Drucker -> Buffett -> Musk`
+- Product/Experience: `Jobs -> KenyaHara -> Musk`
+- High-Impact Decision: `Munger -> Drucker -> Buffett -> Musk`
+- Execution-Stuck: `Musk`
+
+## 3. Advisor/Prompt Responsibilities
+
+### Router Prompt
+- Goal: classify case type, route advisors, identify data gaps.
+- Output: category/confidence/route/handoff notes.
+- Constraint: no final business decision.
+
+### Drucker (Value Definition)
+- Focus: customer identity and value clarity.
+- Checks: customer-fit, value proposition, evidence quality.
+- Hard stop: no clear customer value.
+
+### Jobs (Experience Quality)
+- Focus: user flow clarity and decision friction.
+- Checks: flow coherence, message clarity, content reduction.
+- Hard stop: user cannot understand value quickly.
+
+### Kenya Hara (System Simplicity)
+- Focus: structural necessity and cognitive load.
+- Checks: remove/merge/rename for minimal complexity.
+- Hard stop: complexity increases without clarity gain.
+
+### Munger (Multi-Model Decision)
+- Focus: cross-model risk decomposition.
+- Checks: economics + psychology + probability consistency.
+- Hard stop: key assumptions untestable or tail risk unmanaged.
+
+### Buffett (Moat and Focus)
+- Focus: strategic moat reinforcement.
+- Checks: moat gain, imitation risk, opportunity cost.
+- Hard stop: clear strategic drift from core positioning.
+
+### Musk (Execution Velocity)
+- Focus: move from analysis to immediate execution.
+- Checks: 48-hour launchable action plan, measurable criteria.
+- Hard stop: no owner or no measurable deliverable.
+
+### CEO Final Prompt
+- Goal: merge conflicting advisor outputs and finalize decision.
+- Output: final decision, tradeoffs, 48h/7d actions, kill criteria.
+- Constraint: explicit accountability and review date.
+
+## 4. Run Artifacts
+
+Each run folder includes:
 
 - `01-decision-input.md`
 - `02-router-output.yaml`
@@ -20,7 +98,7 @@ For each run, it creates:
 - `07-one-shot-prompt.md`
 - `openclaw-payload.json`
 
-## Quick Start
+## 5. Quick Start
 
 ```bash
 python3 scripts/run_multi_advisor.py \
@@ -29,23 +107,53 @@ python3 scripts/run_multi_advisor.py \
   --owner "Elias"
 ```
 
-## Provider Branding
+## 6. OpenClaw Integration
 
-Default profile is Claude style in `agents/openai.yaml`.
+Use the same input schema as `references/openclaw-input.example.json`.
 
-If you want ChatGPT style:
+Output `openclaw-payload.json` can be passed directly to downstream nodes for:
+- artifact indexing
+- post-processing
+- notification/reporting
 
-1. Open `agents/openai.chatgpt.yaml`
-2. Copy content into `agents/openai.yaml`
-3. Commit and push
+## 7. Branding Profiles (Claude / ChatGPT)
 
-## Use Cases
+Default profile: `agents/openai.yaml` (Claude style).
 
-- Strategy and growth decisions
-- Product and UX decisions
-- High-impact hiring/partnership/market decisions
-- Execution-stuck cases
+Alternative profile: `agents/openai.chatgpt.yaml`.
 
-## License
+To switch:
+1. copy `agents/openai.chatgpt.yaml` content
+2. replace `agents/openai.yaml`
+3. commit + push
 
-Use and modify in your own workflow repo.
+## 8. Repository Structure
+
+```text
+decision-orchestrator-skill/
+├── SKILL.md
+├── README.md
+├── README.zh-CN.md
+├── agents/
+│   ├── openai.yaml
+│   └── openai.chatgpt.yaml
+├── assets/
+├── references/
+│   └── openclaw-input.example.json
+└── scripts/
+    └── run_multi_advisor.py
+```
+
+## 9. Versioning Guidance
+
+- Use semantic tags for workflow/runtime changes.
+- Keep prompt-structure changes backward-compatible where possible.
+- Log routing or scoring logic changes in commit messages.
+
+## 10. License
+
+Use and adapt freely for your own workflow repository.
+
+## 11. Detailed Prompt Spec
+
+For a strict output contract by role, see [docs/agents.md](./docs/agents.md).
